@@ -42,6 +42,13 @@ http
           });
         });
       });
+    } else if (req.url == "/galeria") {
+      res.writeHead(200, { "Content-Type": "text/html" });
+      fs.readFile("index.html", "utf-8", (err, file) => {
+        if (err) throw err;
+        res.write(file);
+        res.end();
+      });
     }
   })
   .listen(3000, () => console.log("Escuchando el puerto 3000"));
