@@ -20,6 +20,14 @@ http
   .createServer((req, res) => {
     let pokemonesPromesas = [];
     let listaPokemones = [];
+    if (req.url == "/") {
+      res.writeHead(200, { "Content-Type": "text/html" });
+      fs.readFile("index.html", "utf-8", (err, file) => {
+        if (err) throw err;
+        res.write(file);
+        res.end();
+      });
+    }
 
     if (req.url == "/pokemones") {
       pokemonesGet().then((results) => {
@@ -42,7 +50,9 @@ http
           });
         });
       });
-    } else if (req.url == "/galeria") {
+    }
+
+    if (req.url == "/galeria") {
       res.writeHead(200, { "Content-Type": "text/html" });
       fs.readFile("index.html", "utf-8", (err, file) => {
         if (err) throw err;
